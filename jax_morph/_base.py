@@ -65,7 +65,8 @@ class BaseCellState(eqx.Module):
 
             return x
 
-        return jax.tree_map(_elongate, self)
+        # return jax.tree_map(_elongate, self)
+        return jax.tree_util.tree_map(_elongate, self)
 
     def delete(self, del_idx):
         """Delete state array fields to do regeneration experiments."""

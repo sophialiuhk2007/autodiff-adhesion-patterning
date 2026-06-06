@@ -1,4 +1,17 @@
 import jax
+# Compatibility shim: some JAX versions moved tree_map under jax.tree_util
+try:
+    _ = jax.tree_map
+except AttributeError:
+    jax.tree_map = jax.tree_util.tree_map
+
+# Also provide jax.tree.map used in some notebooks/code
+import types
+if not hasattr(jax, "tree") or not hasattr(jax.tree, "map"):
+    if not hasattr(jax, "tree"):
+        jax.tree = types.SimpleNamespace()
+    jax.tree.map = jax.tree_util.tree_map
+
 import jax.numpy as np
 
 import equinox as eqx

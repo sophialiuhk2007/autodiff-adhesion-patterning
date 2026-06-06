@@ -11,6 +11,10 @@ from ..utils import rescaled_algebraic_sigmoid
 from typing import Union, Sequence, Callable
 
 
+def _atleast_2d_array(x):
+    return np.atleast_2d(np.asarray(x))
+
+
 class GeneNetwork(SimulationStep):
     """A gene regulatory network simulation step.
 
@@ -64,7 +68,7 @@ class GeneNetwork(SimulationStep):
         interactions = rescaled_algebraic_sigmoid(
             x @ self.interaction_matrix + self.expression_offset
         )
-        degradation = np.atleast_2d(self.degradation_rate) * x
+        degradation = _atleast_2d_array(self.degradation_rate) * x
 
         return interactions - degradation + Inputs
 
@@ -228,7 +232,7 @@ class OLD_GeneNetwork(SimulationStep):
         # return jax.nn.sigmoid(xt @ self.interaction_matrix) - np.atleast_2d(self.degradation_rate) * xt + I
         return (
             rescaled_algebraic_sigmoid(xt @ self.interaction_matrix)
-            - np.atleast_2d(self.degradation_rate) * xt
+            - _atleast_2d_array(self.degradation_rate) * xt
             + I
         )
 
@@ -367,7 +371,7 @@ class OLD_GeneNetwork_ctype(SimulationStep):
         # return jax.nn.sigmoid(xt @ self.interaction_matrix) - np.atleast_2d(self.degradation_rate) * xt + I
         return (
             rescaled_algebraic_sigmoid(np.einsum("ijk,ik->ij", interaction_matrix, xt))
-            - np.atleast_2d(self.degradation_rate) * xt
+            - _atleast_2d_array(self.degradation_rate) * xt
             + I
         )
 
