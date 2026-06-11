@@ -1,7 +1,0 @@
-{
-  "N_OPT_RUNS": 10,
-  "EPOCHS": 1000,
-  "N_EPISODES": 4,
-  "N_VAL_EPISODES": 64,
-  "LAMBDA": 0
-}
