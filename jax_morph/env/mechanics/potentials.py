@@ -33,16 +33,12 @@ class MorsePotential(MechanicalInteractionPotential):
             ):
                 epsilon_matrix = state.epsilon
             else:
-                raise ValueError(
-                    "Epsilon matrix shape does not match number of particles"
-                )
+                raise ValueError("Epsilon matrix shape does not match number of particles")
 
         else:
             if np.atleast_1d(self.epsilon).size == 1:
                 alive = np.where(state.celltype.sum(1) > 0, 1, 0)
-                epsilon_matrix = (
-                    np.outer(alive, alive) - np.eye(alive.shape[0])
-                ) * self.epsilon
+                epsilon_matrix = (np.outer(alive, alive) - np.eye(alive.shape[0])) * self.epsilon
 
             elif isinstance(self.epsilon, jax.interpreters.xla.DeviceArray):
                 raise NotImplementedError("Multiple cell types not implemented yet")
@@ -94,19 +90,13 @@ class MorsePotentialSpecies(MechanicalInteractionPotential):
 
     def _calculate_pairwise_matrix(self, state, matrix, max, min):
 
-        if (
-            self.epsilon.shape[0] != state.celltype.shape[1]
-            or self.epsilon.shape[1] != state.celltype.shape[1]
-        ):
-            raise ValueError(
-                "Matrix is not n_ctype x n_ctype to use species morse potential function."
-            )
+        if self.epsilon.shape[0] != state.celltype.shape[1] or self.epsilon.shape[1] != state.celltype.shape[1]:
+            raise ValueError("Matrix is not n_ctype x n_ctype to use species morse potential function.")
 
         # First parametrize matrix so it's symmetric - take average of symmetric off diagonal elements
-        matrix = 0.5 * (
-            np.triu(matrix) + np.tril(matrix).T + np.triu(matrix).T + np.tril(matrix)
-        )
+        matrix = 0.5 * (np.triu(matrix) + np.tril(matrix).T + np.triu(matrix).T + np.tril(matrix))
         matrix = matrix - np.eye(state.celltype.shape[1]) * 0.5 * np.diagonal(matrix)
+        # for some reason they subtract half the diagonal instead of the whole diagonal
         matrix = jax.nn.sigmoid(matrix) * max + min
 
         # Now turn this into N x N array of pairwise
@@ -124,12 +114,8 @@ class MorsePotentialSpecies(MechanicalInteractionPotential):
 
     def energy_fn(self, state, *, per_particle=False):
 
-        epsilon_matrix = self._calculate_pairwise_matrix(
-            state, self.epsilon, self.epsilon_max, self.epsilon_min
-        )
-        alpha_matrix = self._calculate_pairwise_matrix(
-            state, self.alpha, self.alpha_max, self.alpha_min
-        )
+        epsilon_matrix = self._calculate_pairwise_matrix(state, self.epsilon, self.epsilon_max, self.epsilon_min)
+        alpha_matrix = self._calculate_pairwise_matrix(state, self.alpha, self.alpha_max, self.alpha_min)
         sigma_matrix = self._calculate_sigma_matrix(state)
 
         # generate morse pair potential
@@ -161,17 +147,13 @@ class MorsePotentialCadherin(MechanicalInteractionPotential):
 
         # Homotypic interactions
         epsilon_matrix = np.sum(
-            jax.vmap(jax.vmap(lambda x, y: x + y, (0, None)), (None, 0))(
-                cad_mat, cad_mat
-            ),
+            jax.vmap(jax.vmap(lambda x, y: x + y, (0, None)), (None, 0))(cad_mat, cad_mat),
             axis=-1,
         )
         epsilon_matrix = epsilon_matrix * ctype_mat
 
         # Heterotypic interactions
-        epsilon_matrix += (1.0 - ctype_mat) * (
-            state.cadherin[:, -1] + state.cadherin[:, -1].T
-        )
+        epsilon_matrix += (1.0 - ctype_mat) * (state.cadherin[:, -1] + state.cadherin[:, -1].T)
 
         # Normalize
         epsilon_matrix = self.eps_max * epsilon_matrix + self.eps_min

@@ -1,4 +1,5 @@
 import jax
+
 # Compatibility shim: some JAX versions moved tree_map under jax.tree_util
 try:
     _ = jax.tree_map
@@ -7,6 +8,7 @@ except AttributeError:
 
 # Also provide jax.tree.map used in some notebooks/code
 import types
+
 if not hasattr(jax, "tree") or not hasattr(jax.tree, "map"):
     if not hasattr(jax, "tree"):
         jax.tree = types.SimpleNamespace()
@@ -19,7 +21,6 @@ import equinox as eqx
 from ._base import SimulationStep
 
 from typing import Callable, Union, Sequence, Any
-
 
 # ------------SEQUENTIAL SIMULATION STEP-----------------
 
@@ -85,9 +86,7 @@ class Sequential(SimulationStep):
             index = self._named_substeps[name]
             # Return the substep from the current instance's tuple
             return self.substeps[index]
-        raise AttributeError(
-            f"'{self.__class__.__name__}' object has no attribute '{name}'"
-        )
+        raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
 
     def __getitem__(self, i: Union[int, slice]) -> Callable:
         if isinstance(i, int):

@@ -27,3 +27,9 @@ dependencies = [
 
 [tool.setuptools.packages.find]
 include = ["jax_morph*"]
+
+[tool.black]
+line-length = 250
+
+[tool.ruff]
+line-length = 250

@@ -1,0 +1,58 @@
+{
+  "epoch": 0,
+  "j": [
+    2.399244189112624,
+    1.8641023580172291,
+    3.4474093614141497
+  ],
+  "examples": [
+    {
+      "example": 0,
+      "path": "trained_models/train-concentric-0/previews/epoch_0000/example_00_final.png",
+      "metrics": {
+        "loss": 0.39330346363564356,
+        "mean_radius_type_1": 1.2078759130017542,
+        "mean_radius_type_2": 1.622254690259889,
+        "mean_radius_type_3": 0.0,
+        "count_type_1": 10,
+        "count_type_2": 30
+      }
+    },
+    {
+      "example": 1,
+      "path": "trained_models/train-concentric-0/previews/epoch_0000/example_01_final.png",
+      "metrics": {
+        "loss": 0.4140249770890809,
+        "mean_radius_type_1": 1.3376487565854924,
+        "mean_radius_type_2": 1.615192843277741,
+        "mean_radius_type_3": 0.0,
+        "count_type_1": 10,
+        "count_type_2": 30
+      }
+    },
+    {
+      "example": 2,
+      "path": "trained_models/train-concentric-0/previews/epoch_0000/example_02_final.png",
+      "metrics": {
+        "loss": 0.3508157113698647,
+        "mean_radius_type_1": 1.0981325595390496,
+        "mean_radius_type_2": 1.7643385188424865,
+        "mean_radius_type_3": 0.0,
+        "count_type_1": 10,
+        "count_type_2": 30
+      }
+    },
+    {
+      "example": 3,
+      "path": "trained_models/train-concentric-0/previews/epoch_0000/example_03_final.png",
+      "metrics": {
+        "loss": 0.3842459118142119,
+        "mean_radius_type_1": 1.2666863542290931,
+        "mean_radius_type_2": 1.6798556742183448,
+        "mean_radius_type_3": 0.0,
+        "count_type_1": 10,
+        "count_type_2": 30
+      }
+    }
+  ]
+}
