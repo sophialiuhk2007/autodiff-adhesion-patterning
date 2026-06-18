@@ -44,9 +44,16 @@ def build_starting_model(key, *, initial_type_fractions, initial_j=None):
     return pattern_model.build_model(initial_j, initial_type_fractions=initial_type_fractions)
 
 
+def clipped_adam(schedule):
+    return optax.chain(
+        optax.clip_by_global_norm(1.0),
+        optax.adam(schedule),
+    )
+
+
 def make_lr_schedule(args):
     if args.lr_schedule == "constant" or args.final_learning_rate is None:
-        return lambda step: args.learning_rate, optax.adam(args.learning_rate)
+        return lambda step: args.learning_rate, clipped_adam(args.learning_rate)
     if args.lr_schedule == "exponential":
         schedule = optax.exponential_decay(
             init_value=args.learning_rate,
@@ -55,10 +62,10 @@ def make_lr_schedule(args):
             staircase=False,
             end_value=args.final_learning_rate,
         )
-        return schedule, optax.adam(schedule)
+        return schedule, clipped_adam(schedule)
     if args.lr_schedule == "linear":
         schedule = optax.linear_schedule(args.learning_rate, args.final_learning_rate, transition_steps=max(args.epochs, 1))
-        return schedule, optax.adam(schedule)
+        return schedule, clipped_adam(schedule)
     raise ValueError(f"Unsupported learning-rate schedule: {args.lr_schedule}")
 
 
@@ -248,7 +255,7 @@ def dump_j_parameters(path, init_model, trained_model):
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--pattern", choices=("salt-pepper-shell", "bilobed-shell"), default="salt-pepper-shell")
+    parser.add_argument("--pattern", choices=("salt-pepper-shell",), default="salt-pepper-shell")
     parser.add_argument("--n-opt-runs", type=int, default=5)
     parser.add_argument("--epochs", type=int, default=1000)
     parser.add_argument("--n-episodes", type=int, default=4)
@@ -262,21 +269,12 @@ def parse_args():
     parser.add_argument("--n-cells", type=int, default=60)
     parser.add_argument("--type-ratios", type=float, nargs=3, default=(1.0, 1.0, 1.0))
     parser.add_argument("--shell-distance-weight", type=float, default=1.0)
-    parser.add_argument("--shell-target-radius", type=float, default=3.0)
-    parser.add_argument("--type1-compactness-weight", type=float, default=1.0)
-    parser.add_argument("--type2-compactness-weight", type=float, default=1.0)
-    parser.add_argument("--type3-compactness-weight", type=float, default=None, help=argparse.SUPPRESS)
-    parser.add_argument("--w11", type=float, default=1)
-    parser.add_argument("--w12", type=float, default=0)
-    parser.add_argument("--w13", type=float, default=0)
-    parser.add_argument("--w22", type=float, default=1)
-    parser.add_argument("--w23", type=float, default=0.0)
+    parser.add_argument("--w12", type=float, default=0.0)
     parser.add_argument("--w33", type=float, default=1.0)
-    parser.add_argument("--w-media1", type=float, default=1.0)
-    parser.add_argument("--w-media2", type=float, default=1.0)
-    parser.add_argument("--w-media3", type=float, default=1.0)
-    parser.add_argument("--w-centroid-distance", type=float, default=1.0)
-    parser.add_argument("--w-frac", type=float, default=0.0)
+    parser.add_argument("--w-media1", type=float, default=10.0)
+    parser.add_argument("--w-media2", type=float, default=10.0)
+    parser.add_argument("--w-media3", type=float, default=10.0)
+    parser.add_argument("--w-frac", type=float, default=5.0)
     parser.add_argument("--initial-j", type=float, nargs=6, default=None, metavar=("J11", "J12", "J13", "J22", "J23", "J33"))
     parser.add_argument("--outdir", type=str, default="./trained_models_patterns/")
     parser.add_argument("--clean", action="store_true")
@@ -288,26 +286,16 @@ if __name__ == "__main__":
     key = jxm.utils.generate_random_key()
     key, init_key = jax.random.split(key)
     initial_type_counts, initial_type_fractions = pattern_model.counts_from_ratios(args.n_cells, args.type_ratios)
-    if args.type3_compactness_weight is not None:
-        args.type2_compactness_weight = args.type3_compactness_weight
 
     istate = pattern_model.build_istate(init_key, n_cells=args.n_cells, type_ratios=args.type_ratios)
     cost_fn = pattern_model.pattern_trajectory_loss(
         pattern=args.pattern,
         shell_distance_weight=args.shell_distance_weight,
-        shell_target_radius=args.shell_target_radius,
-        type1_compactness_weight=args.type1_compactness_weight,
-        type2_compactness_weight=args.type2_compactness_weight,
-        w11=args.w11,
         w12=args.w12,
-        w13=args.w13,
-        w22=args.w22,
-        w23=args.w23,
         w33=args.w33,
         w_media1=args.w_media1,
         w_media2=args.w_media2,
         w_media3=args.w_media3,
-        w_centroid_distance=args.w_centroid_distance,
     )
     loss = InitialPatternFractionsReinforceLoss(
         cost_fn,
