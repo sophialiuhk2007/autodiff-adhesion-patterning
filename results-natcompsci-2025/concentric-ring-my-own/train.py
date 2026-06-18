@@ -35,8 +35,8 @@ def dump_j_parameters(path, init_model, trained_model):
     with open(path, "w") as f:
         json.dump(
             {
-                "initial_j": np.asarray(istate_and_model.model_visible_j(init_model)).tolist(),
-                "trained_j": np.asarray(istate_and_model.model_visible_j(trained_model)).tolist(),
+                "initial_j": np.asarray(istate_and_model.visible_j_from_raw_j(init_model.raw_j)).tolist(),
+                "trained_j": np.asarray(istate_and_model.visible_j_from_raw_j(trained_model.raw_j)).tolist(),
             },
             f,
             indent=2,

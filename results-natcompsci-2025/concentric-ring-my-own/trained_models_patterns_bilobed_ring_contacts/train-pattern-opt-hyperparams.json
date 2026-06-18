@@ -1,0 +1,49 @@
+{
+  "pattern": "bilobed-shell",
+  "n_opt_runs": 5,
+  "epochs": 200,
+  "n_episodes": 10,
+  "n_val_episodes": 0,
+  "n_steps": 20,
+  "learning_rate": 0.1,
+  "lr_schedule": "exponential",
+  "final_learning_rate": 0.001,
+  "early_stop_patience": 0,
+  "early_stop_min_delta": 0.0001,
+  "n_cells": 100,
+  "type_ratios": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "shell_distance_weight": 1.0,
+  "shell_target_radius": 3.0,
+  "type1_compactness_weight": 5.0,
+  "type2_compactness_weight": 5.0,
+  "type3_compactness_weight": null,
+  "w11": 1.0,
+  "w12": 1.0,
+  "w13": 1.0,
+  "w22": 1.0,
+  "w23": 1.0,
+  "w33": 1.0,
+  "w_media1": 5.0,
+  "w_media2": 5.0,
+  "w_media3": 5.0,
+  "w_centroid_distance": 10.0,
+  "w_frac": 0.0,
+  "initial_j": null,
+  "outdir": "./trained_models_patterns_bilobed_ring_contacts",
+  "clean": true,
+  "resolved_outdir": "/Users/mw/Desktop/jax-morph/results-natcompsci-2025/concentric-ring-my-own/trained_models_patterns_bilobed_ring_contacts",
+  "initial_type_counts": [
+    34,
+    33,
+    33
+  ],
+  "initial_type_fractions": [
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333
+  ]
+}
