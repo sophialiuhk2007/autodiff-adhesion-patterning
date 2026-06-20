@@ -1,0 +1,235 @@
+{
+  "outdir": "/home/sol856/jax-morph/results-natcompsci-2025/concentric-ring-my-own/trained_models_patterns_salt_pepper_sweep/wfrac_1/w12_1/ratio_1-1-8/ncells_120",
+  "hyperparams": {
+    "pattern": "salt-pepper-shell",
+    "n_opt_runs": 5,
+    "epochs": 200,
+    "n_episodes": 10,
+    "n_val_episodes": 0,
+    "n_steps": 20,
+    "learning_rate": 0.1,
+    "lr_schedule": "exponential",
+    "final_learning_rate": 0.001,
+    "early_stop_patience": 0,
+    "early_stop_min_delta": 0.0001,
+    "n_cells": 120,
+    "type_ratios": [
+      1.0,
+      1.0,
+      8.0
+    ],
+    "shell_distance_weight": 1.0,
+    "w12": 1.0,
+    "w33": 1.0,
+    "w_media1": 10.0,
+    "w_media2": 10.0,
+    "w_media3": 10.0,
+    "w_frac": 1.0,
+    "initial_j": null,
+    "outdir": "./trained_models_patterns_salt_pepper_sweep/wfrac_1/w12_1/ratio_1-1-8/ncells_120",
+    "clean": true,
+    "resolved_outdir": "/home/sol856/jax-morph/results-natcompsci-2025/concentric-ring-my-own/trained_models_patterns_salt_pepper_sweep/wfrac_1/w12_1/ratio_1-1-8/ncells_120",
+    "initial_type_counts": [
+      21,
+      20,
+      79
+    ],
+    "initial_type_fractions": [
+      0.1,
+      0.1,
+      0.8
+    ]
+  },
+  "runs": [
+    {
+      "run": "train-pattern-0",
+      "n_epochs_logged": 201,
+      "final_epoch": 200,
+      "final_train_loss": -1.5551665950945648,
+      "best_train_loss": -2.136960879618637,
+      "best_train_loss_epoch": 5,
+      "final_learning_rate": 0.001,
+      "final_j": [
+        2.958697170490627,
+        3.134000257792821,
+        2.4241216547428914,
+        2.3440846483634665,
+        2.55145498638207,
+        1.5700269220783247
+      ],
+      "final_type_fractions": [
+        0.022184538332802987,
+        0.010426007367549762,
+        0.9673894542996472
+      ],
+      "final_type_counts": [
+        14,
+        13,
+        93
+      ],
+      "stopped_reason": null,
+      "initial_j": [
+        2.7248854945020513,
+        1.7611022761755688,
+        2.6364758571067233,
+        2.4308194004453405,
+        3.583512675945629,
+        1.4249240820988511
+      ],
+      "trained_j": [
+        2.958697170490627,
+        3.134000257792821,
+        2.4241216547428914,
+        2.3440846483634665,
+        2.55145498638207,
+        1.5700269220783247
+      ],
+      "initial_type_fractions": [
+        0.10000000000000003,
+        0.10000000000000003,
+        0.8
+      ],
+      "trained_type_fractions": [
+        0.022184538332802987,
+        0.010426007367549762,
+        0.9673894542996472
+      ]
+    },
+    {
+      "run": "train-pattern-1",
+      "n_epochs_logged": 201,
+      "final_epoch": 200,
+      "final_train_loss": -2.1624968879541173,
+      "best_train_loss": -2.5687717635542833,
+      "best_train_loss_epoch": 42,
+      "final_learning_rate": 0.001,
+      "final_j": [
+        3.6372729473664807,
+        3.397856528863744,
+        0.9239410319930311,
+        3.7262179118718572,
+        0.9796542277125396,
+        1.0427755674543249
+      ],
+      "final_type_fractions": [
+        0.1312825007841935,
+        0.06927653292737537,
+        0.7994409662884311
+      ],
+      "final_type_counts": [
+        23,
+        18,
+        79
+      ],
+      "stopped_reason": null,
+      "initial_j": [
+        3.3357325288193316,
+        1.6209939120369212,
+        2.3432508573036923,
+        3.466655671197091,
+        2.087140752844328,
+        1.6977980530296182
+      ],
+      "trained_j": [
+        3.6372729473664807,
+        3.397856528863744,
+        0.9239410319930311,
+        3.7262179118718572,
+        0.9796542277125396,
+        1.0427755674543249
+      ],
+      "initial_type_fractions": [
+        0.10000000000000003,
+        0.10000000000000003,
+        0.8
+      ],
+      "trained_type_fractions": [
+        0.1312825007841935,
+        0.06927653292737537,
+        0.7994409662884311
+      ]
+    },
+    {
+      "run": "train-pattern-2",
+      "n_epochs_logged": 201,
+      "final_epoch": 200,
+      "final_train_loss": -1.7033468347615373,
+      "best_train_loss": -3.484918226388814,
+      "best_train_loss_epoch": 162,
+      "final_learning_rate": 0.001,
+      "final_j": [
+        1.3076211241325382,
+        0.8750792039718502,
+        3.6882280094836277,
+        3.3548894300576553,
+        3.4461096267367823,
+        1.7939661477852948
+      ],
+      "final_type_fractions": [
+        0.09999999999998904,
+        0.09999999999998549,
+        0.8000000000000255
+      ],
+      "final_type_counts": [
+        21,
+        20,
+        79
+      ],
+      "stopped_reason": null,
+      "initial_j": [
+        1.4175507511303636,
+        0.9228042561064012,
+        3.6890770258791843,
+        3.2984894072603357,
+        3.418287173354715,
+        1.638655924073828
+      ],
+      "trained_j": [
+        1.3076211241325382,
+        0.8750792039718502,
+        3.6882280094836277,
+        3.3548894300576553,
+        3.4461096267367823,
+        1.7939661477852948
+      ],
+      "initial_type_fractions": [
+        0.10000000000000003,
+        0.10000000000000003,
+        0.8
+      ],
+      "trained_type_fractions": [
+        0.09999999999998904,
+        0.09999999999998549,
+        0.8000000000000255
+      ]
+    },
+    {
+      "run": "train-pattern-3",
+      "n_epochs_logged": 91,
+      "final_epoch": 90,
+      "final_train_loss": -1.885703156474634,
+      "best_train_loss": -2.292371946888932,
+      "best_train_loss_epoch": 81,
+      "final_learning_rate": 0.012589254117941673,
+      "final_j": [
+        3.249878150907958,
+        3.3725469770359764,
+        1.095268282930165,
+        3.5573491818409364,
+        0.9649845308659626,
+        1.1958360493172349
+      ],
+      "final_type_fractions": [
+        0.042560009889373245,
+        0.12155482938377679,
+        0.8358851607268499
+      ],
+      "final_type_counts": [
+        16,
+        22,
+        82
+      ],
+      "stopped_reason": null
+    }
+  ]
+}

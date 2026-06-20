@@ -1,0 +1,235 @@
+{
+  "outdir": "/home/sol856/jax-morph/results-natcompsci-2025/concentric-ring-my-own/trained_models_patterns_salt_pepper_sweep/wfrac_1/w12_1/ratio_1-1-4/ncells_120",
+  "hyperparams": {
+    "pattern": "salt-pepper-shell",
+    "n_opt_runs": 5,
+    "epochs": 200,
+    "n_episodes": 10,
+    "n_val_episodes": 0,
+    "n_steps": 20,
+    "learning_rate": 0.1,
+    "lr_schedule": "exponential",
+    "final_learning_rate": 0.001,
+    "early_stop_patience": 0,
+    "early_stop_min_delta": 0.0001,
+    "n_cells": 120,
+    "type_ratios": [
+      1.0,
+      1.0,
+      4.0
+    ],
+    "shell_distance_weight": 1.0,
+    "w12": 1.0,
+    "w33": 1.0,
+    "w_media1": 10.0,
+    "w_media2": 10.0,
+    "w_media3": 10.0,
+    "w_frac": 1.0,
+    "initial_j": null,
+    "outdir": "./trained_models_patterns_salt_pepper_sweep/wfrac_1/w12_1/ratio_1-1-4/ncells_120",
+    "clean": true,
+    "resolved_outdir": "/home/sol856/jax-morph/results-natcompsci-2025/concentric-ring-my-own/trained_models_patterns_salt_pepper_sweep/wfrac_1/w12_1/ratio_1-1-4/ncells_120",
+    "initial_type_counts": [
+      26,
+      26,
+      68
+    ],
+    "initial_type_fractions": [
+      0.16666666666666666,
+      0.16666666666666666,
+      0.6666666666666666
+    ]
+  },
+  "runs": [
+    {
+      "run": "train-pattern-0",
+      "n_epochs_logged": 201,
+      "final_epoch": 200,
+      "final_train_loss": -0.6071344094144191,
+      "best_train_loss": -3.9912543201533874,
+      "best_train_loss_epoch": 83,
+      "final_learning_rate": 0.001,
+      "final_j": [
+        3.254367997428446,
+        1.0133896932909838,
+        1.0402574064085344,
+        3.4119727724090225,
+        2.9184375956400226,
+        3.1367012278173902
+      ],
+      "final_type_fractions": [
+        0.1553856627459218,
+        0.1148189581765898,
+        0.7297953790774884
+      ],
+      "final_type_counts": [
+        25,
+        22,
+        73
+      ],
+      "stopped_reason": null,
+      "initial_j": [
+        3.2292333060707286,
+        1.056197128736914,
+        1.100615214420559,
+        3.3812642294575106,
+        2.9536337411873994,
+        3.214646296852302
+      ],
+      "trained_j": [
+        3.254367997428446,
+        1.0133896932909838,
+        1.0402574064085344,
+        3.4119727724090225,
+        2.9184375956400226,
+        3.1367012278173902
+      ],
+      "initial_type_fractions": [
+        0.16666666666666666,
+        0.16666666666666666,
+        0.6666666666666666
+      ],
+      "trained_type_fractions": [
+        0.1553856627459218,
+        0.1148189581765898,
+        0.7297953790774884
+      ]
+    },
+    {
+      "run": "train-pattern-1",
+      "n_epochs_logged": 201,
+      "final_epoch": 200,
+      "final_train_loss": -1.3262356007234972,
+      "best_train_loss": -2.3104460604099826,
+      "best_train_loss_epoch": 188,
+      "final_learning_rate": 0.001,
+      "final_j": [
+        3.3150701768710578,
+        1.1896233627311044,
+        0.8826259668535771,
+        1.1793796914464778,
+        3.7441576446342077,
+        2.135967720684894
+      ],
+      "final_type_fractions": [
+        0.22827748670661852,
+        0.05326940199158508,
+        0.7184531113017963
+      ],
+      "final_type_counts": [
+        31,
+        17,
+        72
+      ],
+      "stopped_reason": null,
+      "initial_j": [
+        2.8867602398160708,
+        1.6743237369755894,
+        1.057572413033693,
+        1.1491774109669755,
+        3.735972747219294,
+        2.4482209674871376
+      ],
+      "trained_j": [
+        3.3150701768710578,
+        1.1896233627311044,
+        0.8826259668535771,
+        1.1793796914464778,
+        3.7441576446342077,
+        2.135967720684894
+      ],
+      "initial_type_fractions": [
+        0.16666666666666666,
+        0.16666666666666666,
+        0.6666666666666666
+      ],
+      "trained_type_fractions": [
+        0.22827748670661852,
+        0.05326940199158508,
+        0.7184531113017963
+      ]
+    },
+    {
+      "run": "train-pattern-2",
+      "n_epochs_logged": 201,
+      "final_epoch": 200,
+      "final_train_loss": -0.400562133429712,
+      "best_train_loss": -2.207916649028835,
+      "best_train_loss_epoch": 140,
+      "final_learning_rate": 0.001,
+      "final_j": [
+        1.7959696050309089,
+        2.5495406677319803,
+        1.741917273499275,
+        1.2020252750578515,
+        3.579096033980269,
+        2.7611059319032067
+      ],
+      "final_type_fractions": [
+        0.12861339573240743,
+        0.1312600474658674,
+        0.7401265568017252
+      ],
+      "final_type_counts": [
+        23,
+        23,
+        74
+      ],
+      "stopped_reason": null,
+      "initial_j": [
+        1.1642471637706895,
+        3.169051357305962,
+        2.0101599217793384,
+        1.4923116281834206,
+        3.457489708862532,
+        2.849791143419865
+      ],
+      "trained_j": [
+        1.7959696050309089,
+        2.5495406677319803,
+        1.741917273499275,
+        1.2020252750578515,
+        3.579096033980269,
+        2.7611059319032067
+      ],
+      "initial_type_fractions": [
+        0.16666666666666666,
+        0.16666666666666666,
+        0.6666666666666666
+      ],
+      "trained_type_fractions": [
+        0.12861339573240743,
+        0.1312600474658674,
+        0.7401265568017252
+      ]
+    },
+    {
+      "run": "train-pattern-3",
+      "n_epochs_logged": 159,
+      "final_epoch": 158,
+      "final_train_loss": -2.417671420406119,
+      "best_train_loss": -2.9261467952639166,
+      "best_train_loss_epoch": 67,
+      "final_learning_rate": 0.0026302679918953817,
+      "final_j": [
+        1.6079364152362454,
+        1.4034203811663402,
+        1.1677832881724788,
+        2.604620979806197,
+        2.1228785553735445,
+        3.66290478438584
+      ],
+      "final_type_fractions": [
+        0.06827044143084955,
+        0.1964511339619976,
+        0.7352784246071529
+      ],
+      "final_type_counts": [
+        18,
+        28,
+        74
+      ],
+      "stopped_reason": null
+    }
+  ]
+}

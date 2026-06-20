@@ -54,7 +54,8 @@ def main():
     if len(sys.argv) != 2:
         raise SystemExit("Usage: summarize_pattern_sweep_run.py OUTDIR")
 
-    outdir = Path(sys.argv[1])
+    outdir = Path(sys.argv[1]).expanduser().resolve()
+    outdir.mkdir(parents=True, exist_ok=True)
     hyperparams_path = outdir / "train-pattern-opt-hyperparams.json"
     hyperparams = read_json(hyperparams_path) if hyperparams_path.exists() else {}
 

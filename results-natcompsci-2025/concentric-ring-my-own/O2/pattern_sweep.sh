@@ -10,11 +10,21 @@
 
 set -euo pipefail
 
-cd /home/sol856/jax-morph
+PROJECT_DIR=/home/sol856/jax-morph
+SCRIPT_DIR="${PROJECT_DIR}/results-natcompsci-2025/concentric-ring-my-own"
+
+cd "${PROJECT_DIR}"
+
+module purge
+module load gcc/14.2.0
+module load python/3.13.1
 
 source .venv/bin/activate
 
 mkdir -p logs
+
+which python3
+python3 --version
 
 W_FRACS=(0 1 5)
 W12S=(0 1)
@@ -41,7 +51,7 @@ W_FRAC=${W_FRACS[$WFRAC_INDEX]}
 
 read -r TYPE_RATIO_1 TYPE_RATIO_2 TYPE_RATIO_3 <<< "$TYPE_RATIO_STRING"
 
-OUTDIR="./trained_models_patterns_salt_pepper_sweep/wfrac_${W_FRAC}/w12_${W12}/ratio_${TYPE_RATIO_LABEL}/ncells_${N_CELLS}"
+OUTDIR="${SCRIPT_DIR}/trained_models_patterns_salt_pepper_sweep/wfrac_${W_FRAC}/w12_${W12}/ratio_${TYPE_RATIO_LABEL}/ncells_${N_CELLS}"
 
 echo "started_at=$(date -Is)"
 echo "slurm_job_id=${SLURM_JOB_ID:-local}"
@@ -55,7 +65,7 @@ echo "git_status_short_start=$(git status --short || true)"
 echo "config: w_frac=${W_FRAC}, w12=${W12}, type_ratios=${TYPE_RATIO_1} ${TYPE_RATIO_2} ${TYPE_RATIO_3}, n_cells=${N_CELLS}"
 echo "outdir=${OUTDIR}"
 
-python results-natcompsci-2025/concentric-ring-my-own/train_logged_patterns.py \
+python3 results-natcompsci-2025/concentric-ring-my-own/train_logged_patterns.py \
   --pattern salt-pepper-shell \
   --n-opt-runs 5 \
   --epochs 200 \
@@ -75,6 +85,6 @@ python results-natcompsci-2025/concentric-ring-my-own/train_logged_patterns.py \
   --outdir "${OUTDIR}" \
   --clean
 
-python results-natcompsci-2025/concentric-ring-my-own/O2/summarize_pattern_sweep_run.py "${OUTDIR}"
+python3 results-natcompsci-2025/concentric-ring-my-own/O2/summarize_pattern_sweep_run.py "${OUTDIR}"
 
 echo "finished_at=$(date -Is)"

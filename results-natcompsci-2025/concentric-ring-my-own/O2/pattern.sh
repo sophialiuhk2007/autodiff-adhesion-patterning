@@ -9,11 +9,18 @@
 
 cd /home/sol856/jax-morph
 
+module purge
+module load gcc/14.2.0
+module load python/3.13.1
+
 source .venv/bin/activate
 
 mkdir -p logs
 
-python results-natcompsci-2025/concentric-ring-my-own/train_logged_patterns.py \
+which python3
+python3 --version
+
+python3 results-natcompsci-2025/concentric-ring-my-own/train_logged_patterns.py \
   --pattern salt-pepper-shell \
   --n-opt-runs 5 \
   --epochs 200 \

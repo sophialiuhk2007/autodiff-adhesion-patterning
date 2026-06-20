@@ -1,0 +1,62 @@
+[
+  {
+    "run_dir": "/home/sol856/jax-morph/results-natcompsci-2025/concentric-ring-my-own/trained_models_patterns_salt_pepper_sweep/wfrac_0/w12_0/ratio_1-1-4/ncells_120/train-pattern-2",
+    "missing": [
+      "j_parameters.json"
+    ]
+  },
+  {
+    "run_dir": "/home/sol856/jax-morph/results-natcompsci-2025/concentric-ring-my-own/trained_models_patterns_salt_pepper_sweep/wfrac_0/w12_0/ratio_1-1-8/ncells_120/train-pattern-2",
+    "missing": [
+      "j_parameters.json"
+    ]
+  },
+  {
+    "run_dir": "/home/sol856/jax-morph/results-natcompsci-2025/concentric-ring-my-own/trained_models_patterns_salt_pepper_sweep/wfrac_0/w12_1/ratio_1-1-4/ncells_120/train-pattern-3",
+    "missing": [
+      "j_parameters.json"
+    ]
+  },
+  {
+    "run_dir": "/home/sol856/jax-morph/results-natcompsci-2025/concentric-ring-my-own/trained_models_patterns_salt_pepper_sweep/wfrac_0/w12_1/ratio_1-1-8/ncells_120/train-pattern-3",
+    "missing": [
+      "j_parameters.json"
+    ]
+  },
+  {
+    "run_dir": "/home/sol856/jax-morph/results-natcompsci-2025/concentric-ring-my-own/trained_models_patterns_salt_pepper_sweep/wfrac_1/w12_0/ratio_1-1-4/ncells_120/train-pattern-4",
+    "missing": [
+      "j_parameters.json"
+    ]
+  },
+  {
+    "run_dir": "/home/sol856/jax-morph/results-natcompsci-2025/concentric-ring-my-own/trained_models_patterns_salt_pepper_sweep/wfrac_1/w12_0/ratio_1-1-8/ncells_120/train-pattern-3",
+    "missing": [
+      "j_parameters.json"
+    ]
+  },
+  {
+    "run_dir": "/home/sol856/jax-morph/results-natcompsci-2025/concentric-ring-my-own/trained_models_patterns_salt_pepper_sweep/wfrac_1/w12_1/ratio_1-1-4/ncells_120/train-pattern-3",
+    "missing": [
+      "j_parameters.json"
+    ]
+  },
+  {
+    "run_dir": "/home/sol856/jax-morph/results-natcompsci-2025/concentric-ring-my-own/trained_models_patterns_salt_pepper_sweep/wfrac_1/w12_1/ratio_1-1-8/ncells_120/train-pattern-3",
+    "missing": [
+      "j_parameters.json"
+    ]
+  },
+  {
+    "run_dir": "/home/sol856/jax-morph/results-natcompsci-2025/concentric-ring-my-own/trained_models_patterns_salt_pepper_sweep/wfrac_5/w12_0/ratio_1-1-8/ncells_120/train-pattern-3",
+    "missing": [
+      "j_parameters.json"
+    ]
+  },
+  {
+    "run_dir": "/home/sol856/jax-morph/results-natcompsci-2025/concentric-ring-my-own/trained_models_patterns_salt_pepper_sweep/wfrac_5/w12_1/ratio_1-1-4/ncells_120/train-pattern-2",
+    "missing": [
+      "j_parameters.json"
+    ]
+  }
+]
