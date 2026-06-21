@@ -220,6 +220,10 @@ def _contact_matrix(state):
 
 def contact_frequency(state, i, j):
     contact = _contact_matrix(state)
+    return contact_frequency_from_contact(state, contact, i, j)
+
+
+def contact_frequency_from_contact(state, contact, i, j):
     # ti and tj are 1D indicator arrays for cell types i and j
     # e.g. ti[k] is 1.0 if cell k is type i, otherwise 0.0
     ti = state.celltype[:, i]
@@ -237,6 +241,10 @@ def contact_frequency(state, i, j):
 
 def media_contact_frequency(state, celltype_idx):
     contact = _contact_matrix(state)
+    return media_contact_frequency_from_contact(state, contact, celltype_idx)
+
+
+def media_contact_frequency_from_contact(state, contact, celltype_idx):
     # neighbor_contact counts the number of contact neighbors each cell has
     neighbor_contact = np.sum(contact, axis=1)
     # cells with few neighbors have higher media exposure
@@ -299,14 +307,15 @@ def pattern_loss(
     w_media2=3,
     w_media3=3,
 ):
+    contact = _contact_matrix(state)
     # f12 is the cross-contact frequency between type 1 and type 2 cells
-    f12 = contact_frequency(state, 0, 1)
+    f12 = contact_frequency_from_contact(state, contact, 0, 1)
     # f33 is the type-3 self-contact frequency
-    f33 = contact_frequency(state, 2, 2)
+    f33 = contact_frequency_from_contact(state, contact, 2, 2)
     # m1/m2/m3 are media exposure scores for type 1, type 2, and type 3
-    m1 = media_contact_frequency(state, 0)
-    m2 = media_contact_frequency(state, 1)
-    m3 = media_contact_frequency(state, 2)
+    m1 = media_contact_frequency_from_contact(state, contact, 0)
+    m2 = media_contact_frequency_from_contact(state, contact, 1)
+    m3 = media_contact_frequency_from_contact(state, contact, 2)
     # shell_distance_loss is negative, so minimizing this term pushes type 3 outward
     loss = shell_distance_weight * shell_distance_loss(state)
 
