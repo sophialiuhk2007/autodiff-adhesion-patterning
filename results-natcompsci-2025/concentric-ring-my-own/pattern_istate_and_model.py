@@ -135,18 +135,25 @@ def visible_fractions_from_raw_fractions(raw_fractions):
 def raw_species_matrix_from_raw_j(raw_j):
     return np.array(
         [
-            [2.0 * raw_j[0], raw_j[1], raw_j[2]],
-            [raw_j[1], 2.0 * raw_j[3], raw_j[4]],
-            [raw_j[2], raw_j[4], 2.0 * raw_j[5]],
+            [raw_j[0], raw_j[1], raw_j[2]],
+            [raw_j[1], raw_j[3], raw_j[4]],
+            [raw_j[2], raw_j[4], raw_j[5]],
         ]
     )
+    # return np.array(
+    #     [
+    #         [2.0 * raw_j[0], raw_j[1], raw_j[2]],
+    #         [raw_j[1], 2.0 * raw_j[3], raw_j[4]],
+    #         [raw_j[2], raw_j[4], 2.0 * raw_j[5]],
+    #     ]
+    # )
 
 
 def raw_species_matrix_from_target_alpha(target_alpha, shape, *, alpha_min=1.0, alpha_max=3.0):
     scaled = (target_alpha - alpha_min) / alpha_max
     raw = np.ones(shape) * _logit(scaled)
     diag = np.diag(raw)
-    return raw.at[np.diag_indices(raw.shape[0])].set(2.0 * diag)
+    return raw.at[np.diag_indices(raw.shape[0])].set(1.0 * diag)  # 2.0 times
 
 
 def build_relaxation_model_from_raw_j(raw_j):
