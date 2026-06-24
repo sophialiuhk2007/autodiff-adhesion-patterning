@@ -43,6 +43,7 @@ def animate_adhesion_trajectory(
     istate,
     *,
     path=None,
+    hidden_types=None,
     frame_stride=1,
     interval=120,
     figsize=(8.5, 4.8),
@@ -61,16 +62,25 @@ def animate_adhesion_trajectory(
         [onp.asarray(istate.radius)[None, :, :], onp.asarray(trajectory.radius)],
         axis=0,
     ).reshape(positions.shape[0], positions.shape[1])
+    hidden_types = set(hidden_types or [])
+    all_type_idx = onp.argmax(celltypes, axis=2) + 1
+    all_visible_mask = ~onp.isin(all_type_idx, list(hidden_types))
     frame_indices = list(range(0, int(positions.shape[0]), frame_stride))
     if frame_indices[-1] != int(positions.shape[0]) - 1:
         frame_indices.append(int(positions.shape[0]) - 1)
 
-    mins = positions.min(axis=(0, 1))
-    maxs = positions.max(axis=(0, 1))
+    visible_positions = positions[all_visible_mask]
+    visible_radii = radii[all_visible_mask]
+    if visible_positions.size == 0:
+        visible_positions = positions.reshape(-1, positions.shape[-1])
+        visible_radii = radii.reshape(-1)
+
+    mins = visible_positions.min(axis=0)
+    maxs = visible_positions.max(axis=0)
     center = 0.5 * (mins + maxs)
-    span = float(onp.max(maxs - mins)) + 2.0 * float(onp.max(radii))
-    colors = ["#3452b8", "#d4ad4f"]
-    alphas = [0.56, 0.44]
+    span = float(onp.max(maxs - mins)) + 2.0 * float(onp.max(visible_radii))
+    colors = ["#3452b8", "#d4ad4f", "#b4002c", "#2f8f5b", "#7b4fb3"]
+    alphas = [0.56, 0.44, 0.34, 0.40, 0.38]
 
     u = onp.linspace(0, 2 * onp.pi, 18)
     v = onp.linspace(0, onp.pi, 10)
@@ -86,16 +96,19 @@ def animate_adhesion_trajectory(
         ax.clear()
         pos = positions[t]
         type_idx = onp.argmax(celltypes[t], axis=1)
+        visible_mask = ~onp.isin(type_idx + 1, list(hidden_types))
         order = onp.argsort(type_idx)[::-1]
+        order = order[visible_mask[order]]
         for cell_i in order:
             radius = float(radii[t, cell_i])
             ctype = int(type_idx[cell_i])
+            style_i = ctype % len(colors)
             ax.plot_surface(
                 pos[cell_i, 0] + radius * sphere_x,
                 pos[cell_i, 1] + radius * sphere_y,
                 pos[cell_i, 2] + radius * sphere_z,
-                color=colors[ctype],
-                alpha=alphas[ctype],
+                color=colors[style_i],
+                alpha=alphas[style_i],
                 linewidth=0.0,
                 shade=True,
                 antialiased=True,
@@ -105,7 +118,10 @@ def animate_adhesion_trajectory(
         ax.set_zlim(center[2] - span / 2, center[2] + span / 2)
         ax.view_init(elev=18, azim=35)
         ax.set_axis_off()
-        ax.set_title(f"adhesion-only simulation t={t}", fontsize=16)
+        title = f"adhesion-only simulation t={t}"
+        if hidden_types:
+            title += f" hidden types {sorted(hidden_types)}"
+        ax.set_title(title, fontsize=16)
 
     anim = FuncAnimation(fig, animate, frames=len(frame_indices), interval=interval)
     html_text = anim.to_jshtml()
@@ -181,14 +197,21 @@ def save_forward_animation(
     outdir,
     istate,
     trajectory,
+    hidden_types=None,
 ):
     outdir = Path(outdir)
     outdir.mkdir(exist_ok=True)
-    animation_path = outdir / "adhesion_forward_animation.html"
+    hidden_types = list(hidden_types or [])
+    if hidden_types:
+        hidden_tag = "-hidden-" + "-".join(str(t) for t in hidden_types)
+    else:
+        hidden_tag = ""
+    animation_path = outdir / f"adhesion_forward_animation{hidden_tag}.html"
     animation = animate_adhesion_trajectory(
         trajectory,
         istate,
         path=animation_path,
+        hidden_types=hidden_types,
         frame_stride=1,
         interval=120,
         figsize=(8.5, 4.8),
@@ -253,6 +276,7 @@ def save_forward_visualizations(
     n_type_2,
     n_steps,
     seed,
+    hidden_types=None,
 ):
     preview = save_initial_final_visualizations(
         notebook_dir=notebook_dir,
@@ -267,6 +291,7 @@ def save_forward_visualizations(
         outdir=outdir,
         istate=istate,
         trajectory=trajectory,
+        hidden_types=hidden_types,
     )
     summary = save_forward_summary(
         outdir=outdir,
