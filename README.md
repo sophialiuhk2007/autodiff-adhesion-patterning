@@ -1,7 +1,6 @@
-# JAX Morph: Salt-and-Pepper Core With Envelope
+# Autodiff Adhesion Patterning: Salt-and-Pepper Core With Envelope
 
-This repository gives the training script and model used for learning relative energy differences (**J-matrix**) for a salt-and-pepper/intermixed core of cell
-types 1 and 2 surrounded by a type-3 envelope. Here, we define a loss function that hopes to captures factors specific to this configuration. This approach of defining a bespoke loss function is an older approach taken in the early stages of our project, which aims to learn the **J-matrix** for configurations with >2 cell types.
+This repository contains the training script and model used for learning relative energy differences (**J-matrix**) for a salt-and-pepper/intermixed core of cell types 1 and 2 surrounded by a type-3 envelope. Here, we define a loss function that captures factors specific to this configuration. This bespoke loss function is an older approach from the early stages of a project aimed at learning **J-matrices** for configurations with more than 2 cell types.
 
 The experiment code and notebook live in:
 
@@ -22,11 +21,11 @@ Important files:
 Clone the repo and enter it:
 
 ```bash
-git clone https://github.com/sophialiuhk2007/summer_research_2026.git jax-morph
-cd jax-morph
+git clone https://github.com/sophialiuhk2007/autodiff-adhesion-patterning.git
+cd autodiff-adhesion-patterning
 ```
 
-Create and activate a virtual environment:
+Create and activate a Python 3.10+ virtual environment:
 
 ```bash
 python3 -m venv .venv
@@ -54,7 +53,7 @@ python -c "import jax, jax_md, equinox, diffrax, optax, jax_morph; print('jax-mo
 
 ## Quick Start
 
-Go to the experiment directory:
+From the repository root, go to the experiment directory:
 
 ```bash
 cd experiments/intermixed_envelope
@@ -92,7 +91,7 @@ J11, J12, J13, J22, J23, J33
 
 ## Use the Visualization Notebook
 
-Start JupyterLab from the experiment directory:
+From the repository root, start JupyterLab from the experiment directory:
 
 ```bash
 cd experiments/intermixed_envelope
@@ -174,7 +173,7 @@ J = np.array([
 
 ## Rerun Training
 
-To regenerate the trained run used by the notebook:
+From the repository root, regenerate the trained run used by the notebook:
 
 ```bash
 cd experiments/intermixed_envelope
