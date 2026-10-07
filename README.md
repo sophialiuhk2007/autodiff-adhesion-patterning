@@ -1,5 +1,9 @@
 # Autodiff Adhesion Patterning: Salt-and-Pepper Core With Envelope
 
+> **Limited preview.** This repository is a small public excerpt of my Summer 2026 research. That project
+> uses JAX automatic differentiation to learn the cell–cell adhesion energy matrix (**J-matrix**) that
+> produces a target multicellular configuration. The full codebase is private while the work is in progress.
+
 This repository contains the training script and model used for learning relative energy differences (**J-matrix**) for a salt-and-pepper/intermixed core of cell types 1 and 2 surrounded by a type-3 envelope. Here, we define a loss function that captures factors specific to this configuration. This bespoke loss function is an older approach from the early stages of a project aimed at learning **J-matrices** for configurations with more than 2 cell types.
 
 The experiment code and notebook live in:
